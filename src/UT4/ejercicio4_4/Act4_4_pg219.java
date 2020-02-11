@@ -29,13 +29,11 @@ public class Act4_4_pg219 {
         int puerto = 587;
         String remitente = "scuesta.test@gmail.com";
         String destino1 = "sebastian.cuesta.molto@gmail.com";
-
-//        String asunto = "Alexis guapo te quiero";
-//        String mensaje = "Eres el mejor alexis";
         String asunto = "Prueba 3 de SMTPClient con GMAIL y SIN TLS";
         String mensaje = "Este mensaje no va con TLS.\n\nEste es el tercer mensaje que envio a mi cuenta de correo personal.\nA través de un programa en Java.\nUn Saludo!";
         String resp = "";
-
+        asunto = "";
+        mensaje = "";
 
         System.out.println("Iniciando el programa........\n\n");
         /* ======================== DATOS IMPRESOS ======================== */
@@ -47,9 +45,17 @@ public class Act4_4_pg219 {
         System.out.println("Introduce puerto................: " + puerto);
         System.out.println("Introduce correo del remitente..: " + remitente);
         System.out.println("Introduce correo destinatario...: " + destino1);
-		System.out.println("Introduce asunto................: " + asunto);
+        System.out.println("Introduce asunto................: " + asunto);
         System.out.println("Introduce mensaje...............: " + mensaje);
 
+        asunto = "";
+        mensaje = "";
+        asunto = r.dato("Introduce asunto................: ");
+        System.out.print("Introduce mensaje...............: ");
+        do {
+            String s = r.dato("");
+            mensaje += s + "\n";
+        } while (!server.equals("*"));
 
         /* ======================== INICIO ENVIO ======================== */
         System.out.println("\n\nIniciando envio del correo con los datos anteriores........\n");
