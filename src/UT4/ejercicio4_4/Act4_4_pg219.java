@@ -15,7 +15,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.spec.InvalidKeySpecException;
 
-public class ClienteSMTP3 {
+public class Act4_4_pg219 {
     public static void main(String[] args) throws NoSuchAlgorithmException, UnrecoverableKeyException,
             KeyStoreException, InvalidKeyException, InvalidKeySpecException {
         Read r = new Read();
@@ -29,24 +29,34 @@ public class ClienteSMTP3 {
         int puerto = 587;
         String remitente = "scuesta.test@gmail.com";
         String destino1 = "sebastian.cuesta.molto@gmail.com";
-        String asunto = "Prueba de SMTPClient con GMAIL";
-        String mensaje = "Hola. \nEnviando saludos.\nUsando  GMAIL.\nChao.";
-        String resp = "";
-        System.out.print("Necesita negociación TLS: ");
-        resp = r.dato("");
-        System.out.println("Introduce servidor SMTP: " + server);
-        System.out.println("Introduce usuario: " + username);
-        System.out.println("Introduce contraseña: " + password);
-        System.out.println("Introduce puerto: " + puerto);
-        System.out.println("Introduce correo del remitente: " + remitente);
-        System.out.println("Introduce correo del destinatario: " + destino1);
-		System.out.println("Introduce asunto: " + asunto);
-        System.out.println("Introduce mensaje: " + mensaje);
 
+//        String asunto = "Alexis guapo te quiero";
+//        String mensaje = "Eres el mejor alexis";
+        String asunto = "Prueba 3 de SMTPClient con GMAIL y SIN TLS";
+        String mensaje = "Este mensaje no va con TLS.\n\nEste es el tercer mensaje que envio a mi cuenta de correo personal.\nA través de un programa en Java.\nUn Saludo!";
+        String resp = "";
+
+
+        System.out.println("Iniciando el programa........\n\n");
+        /* ======================== DATOS IMPRESOS ======================== */
+        System.out.print("Necesita negociación TLS (S, N)?: ");
+        resp = r.dato("");
+        System.out.println("Introduce servidor SMTP.........: " + server);
+        System.out.println("Introduce usuario...............: " + username);
+        System.out.println("Introduce contraseña............: " + password);
+        System.out.println("Introduce puerto................: " + puerto);
+        System.out.println("Introduce correo del remitente..: " + remitente);
+        System.out.println("Introduce correo destinatario...: " + destino1);
+		System.out.println("Introduce asunto................: " + asunto);
+        System.out.println("Introduce mensaje...............: " + mensaje);
+
+
+        /* ======================== INICIO ENVIO ======================== */
+        System.out.println("\n\nIniciando envio del correo con los datos anteriores........\n");
         try {
             int respuesta;
 
-            // Creaci�n de la clave para establecer un canal seguro
+            // Creación de la clave para establecer un canal seguro
             KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
             kmf.init(null, null);
             KeyManager km = kmf.getKeyManagers()[0];
@@ -54,26 +64,27 @@ public class ClienteSMTP3 {
             // nos conectamos al servidor SMTP
             client.connect(server, puerto);
             System.out.println("1 - " + client.getReplyString());
-            // se establece la clave para la comunicaci�n segura
+            // se establece la clave para la comunicación segura
             client.setKeyManager(km);
 
             respuesta = client.getReplyCode();
             if (!SMTPReply.isPositiveCompletion(respuesta)) {
                 client.disconnect();
-                System.err.println("CONEXI�N RECHAZADA.");
+                System.err.println("CONEXIÓN RECHAZADA.");
                 System.exit(1);
             }
 
-            // se env�a el commando EHLO
+            // se envía el commando EHLO
             client.ehlo(server);// necesario
             System.out.println("2 - " + client.getReplyString());
             if (resp.equalsIgnoreCase("s")) {
-                // NECESITA NEGOCIACI�N TLS - MODO NO IMPLICITO
+                System.out.println("\n =========  CON TLS  =========");
+                // NECESITA NEGOCIACIÓN TLS - MODO NO IMPLICITO
                 // Se ejecuta el comando STARTTLS y se comprueba si es true
                 if (client.execTLS()) {
                     System.out.println("3 - " + client.getReplyString());
 
-                    // se realiza la autenticaci�n con el servidor
+                    // se realiza la autenticación con el servidor
                     if (client.auth(AuthenticatingSMTPClient.AUTH_METHOD.LOGIN, username, password)) {
                         System.out.println("4 - " + client.getReplyString());
                         // se crea la cabecera
@@ -100,7 +111,7 @@ public class ClienteSMTP3 {
                         System.out.println("7 - " + client.getReplyString());
 
                         if (!exito) { // fallo
-                            System.out.println("FALLO AL FINALIZAR TRANSACCI�N.");
+                            System.out.println("FALLO AL FINALIZAR TRANSACCIÓN.");
                             System.exit(1);
                         } else
                             System.out.println("MENSAJE ENVIADO CON EXITO......");
@@ -110,6 +121,7 @@ public class ClienteSMTP3 {
                 } else
                     System.out.println("FALLO AL EJECUTAR  STARTTLS.");
             } else {
+                System.out.println("\n =========  SIN TLS  =========");
                 if (client.auth(AuthenticatingSMTPClient.AUTH_METHOD.LOGIN, username, password)) {
                     System.out.println("4 - " + client.getReplyString());
                     // se crea la cabecera
@@ -137,7 +149,7 @@ public class ClienteSMTP3 {
                     System.out.println("7 - " + client.getReplyString());
 
                     if (!exito) { // fallo
-                        System.out.println("FALLO AL FINALIZAR LA TRANSACCI�N.");
+                        System.out.println("FALLO AL FINALIZAR LA TRANSACCIÓN.");
                         System.exit(1);
                     } else
                         System.out.println("MENSAJE ENVIADO CON EXITO......");
@@ -159,7 +171,7 @@ public class ClienteSMTP3 {
             f.printStackTrace();
         }
 
-        System.out.println("Fin de env�o.");
+        System.out.println("Fin de envío.");
         System.exit(0);
     }// main
 }// ..ClienteSMTP3
