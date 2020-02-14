@@ -41,7 +41,7 @@ public class Ejemplo1POP3 {
         System.exit(0);
     }// main
 
-    private static void RecuperaMensajes(POP3MessageInfo[] men, POP3SClient pop3) throws IOException{
+    private static void recuperaMensajes(POP3MessageInfo[] men, POP3SClient pop3) throws IOException{
         for(int i = 0;i<men.length;i++){
             System.out.println("Mensaje: "+(i+1));
             POP3MessageInfo msginfo = men [i]; // lista de mensajes
@@ -53,7 +53,7 @@ public class Ejemplo1POP3 {
         } // for
     } // Recuperamensajes
 
-    private static void RecuperaCabeceras(POP3MessageInfo[] men, POP3SClient pop3) throws IOException{
+    private static void recuperaCabeceras(POP3MessageInfo[] men, POP3SClient pop3) throws IOException{
         for(int i = 0;i<men.length;i++){
             System.out.println("Mensaje: "+(i+1));
             POP3MessageInfo msginfo = men [i]; // lista de mensajes

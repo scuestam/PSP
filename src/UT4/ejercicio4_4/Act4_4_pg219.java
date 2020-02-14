@@ -32,8 +32,6 @@ public class Act4_4_pg219 {
         String asunto = "Prueba 3 de SMTPClient con GMAIL y SIN TLS";
         String mensaje = "Este mensaje no va con TLS.\n\nEste es el tercer mensaje que envio a mi cuenta de correo personal.\nA través de un programa en Java.\nUn Saludo!";
         String resp = "";
-        asunto = "";
-        mensaje = "";
 
         System.out.println("Iniciando el programa........\n\n");
         /* ======================== DATOS IMPRESOS ======================== */
@@ -48,6 +46,7 @@ public class Act4_4_pg219 {
         System.out.println("Introduce asunto................: " + asunto);
         System.out.println("Introduce mensaje...............: " + mensaje);
 
+        System.out.println("\nSe introducirán un asunto y mensaje nuevos: ");
         asunto = "";
         mensaje = "";
         asunto = r.dato("Introduce asunto................: ");
