@@ -106,7 +106,7 @@ public class Act4_4_pg219 {
                             System.out.println("FALLO AL ENVIAR DATA.");
                             System.exit(1);
                         }
-
+                        /**/
                         writer.write(cabecera.toString()); // cabecera
                         writer.write(mensaje);// luego mensaje
                         writer.close();
